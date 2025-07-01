@@ -11,7 +11,7 @@ It includes a complete working user flow:
 
 ## 📦 What's Included in This ZIP
 
-The zip file `guvi-clean.zip` contains:
+The zip file `guvi-intern-project.zip` contains:
 
 - ✅ `signup.html` - Signup page with validation
 - ✅ `login.html` - Login page
