@@ -1,6 +1,6 @@
 # 💻 GUVI Internship Project – Full Stack Web Application
 
-This project was developed as part of the **GUVI Full Stack Developer Internship** task. It demonstrates a fully functional user system with:
+This project was developed as part of the **GUVI Web Developer Internship** task. It demonstrates a fully functional user system with:
 
 - ✅ Signup with real-time form validation  
 - ✅ Login system with authentication  
@@ -29,28 +29,33 @@ This project was developed as part of the **GUVI Full Stack Developer Internship
 guvi-clean/
 │
 ├── assets/
-│ ├── bg-video.mp4
-│ ├── placeholder.avif
-│ └── ...
+│   ├── bg-video.mp4
+│   ├── bg.jpg
+│   ├── login.jpg
+│   ├── placeholder.avif
+│   └── profile.jpg
 │
 ├── js/
-│ ├── signup.js
-│ ├── login.js
-│ └── profile.js
+│   ├── signup.js           ← Handles signup form validation + AJAX
+│   ├── login.js            ← Handles login and redirect
+│   └── profile.js          ← Fetch/update profile via AJAX
 │
 ├── php/
-│ ├── signup.php
-│ ├── login.php
-│ ├── fetch_profile.php
-│ ├── update_profile.php
-│ └── sync_user_to_mongo.php
+│   ├── config.php              ← MySQL + MongoDB DB connection
+│   ├── signup.php              ← Inserts user into MySQL + MongoDB
+│   ├── login.php               ← Authenticates user via MySQL
+│   ├── fetch_profile.php       ← Fetches profile from MongoDB
+│   ├── update_profile.php      ← Updates profile to MongoDB
+│   └── sync_user_to_mongo.php  ← Sync helper to insert Mongo user
 │
-├── vendor/ ← MongoDB PHP dependencies (via Composer)
+├── vendor/                  ← Composer-generated MongoDB PHP library
+│   └── ...                  ← (MongoDB PHP dependencies)
 │
-├── signup.html
-├── login.html
-├── profile.html
-
+├── signup.html              ← User registration page
+├── login.html               ← Login form page
+├── profile.html             ← User profile display & update page
+├── composer.json            ← Composer dependencies file
+├── composer.lock            ← Composer lock file
 
 ---
 
