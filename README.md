@@ -24,7 +24,38 @@ This project was developed as part of the **GUVI Web Developer Internship** task
 
 ---
 
+📁 Folder Structure
+guvi-clean/
+├── 📁 assets/                  # Images and background media
+│   ├── bg-video.mp4
+│   ├── bg.jpg
+│   ├── login.jpg
+│   ├── placeholder.avif
+│   └── profile.jpg
+│
+├── 📁 js/                      # Frontend JS files
+│   ├── signup.js              # Handles signup validation + AJAX
+│   ├── login.js               # Login + localStorage session
+│   └── profile.js             # Profile fetch & update via AJAX
+│
+├── 📁 php/                     # Backend PHP scripts
+│   ├── config.php             # MySQL + MongoDB DB connection
+│   ├── signup.php             # Inserts user into MySQL + MongoDB
+│   ├── login.php              # Authenticates via MySQL
+│   ├── fetch_profile.php      # Fetches profile from MongoDB
+│   ├── update_profile.php     # Updates MongoDB profile
+│   └── sync_user_to_mongo.php # Helper to sync MySQL user to MongoDB
+│
+├── 📁 vendor/                  # Composer-generated MongoDB library
+│   └── ...                    # MongoDB PHP dependencies
+│
+├── signup.html                # User registration page
+├── login.html                 # Login page
+├── profile.html               # User profile view & edit
+├── composer.json              # Composer dependencies
+└── composer.lock              # Composer lock file
 
+---
 
 ## 🛠️ Technologies Used
 
