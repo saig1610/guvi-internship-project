@@ -26,37 +26,7 @@ This project was developed as part of the **GUVI Web Developer Internship** task
 
 ## 📂 Project Structure
 
-guvi-clean/
-│
-├── assets/
-│   ├── bg-video.mp4
-│   ├── bg.jpg
-│   ├── login.jpg
-│   ├── placeholder.avif
-│   └── profile.jpg
-│
-├── js/
-│   ├── signup.js           ← Handles signup form validation + AJAX
-│   ├── login.js            ← Handles login and redirect
-│   └── profile.js          ← Fetch/update profile via AJAX
-│
-├── php/
-│   ├── config.php              ← MySQL + MongoDB DB connection
-│   ├── signup.php              ← Inserts user into MySQL + MongoDB
-│   ├── login.php               ← Authenticates user via MySQL
-│   ├── fetch_profile.php       ← Fetches profile from MongoDB
-│   ├── update_profile.php      ← Updates profile to MongoDB
-│   └── sync_user_to_mongo.php  ← Sync helper to insert Mongo user
-│
-├── vendor/                  ← Composer-generated MongoDB PHP library
-│   └── ...                  ← (MongoDB PHP dependencies)
-│
-├── signup.html              ← User registration page
-├── login.html               ← Login form page
-├── profile.html             ← User profile display & update page
-├── composer.json            ← Composer dependencies file
-├── composer.lock            ← Composer lock file
-
+<pre> guvi-clean/ ├── assets/ │ ├── bg-video.mp4 │ ├── bg.jpg │ ├── login.jpg │ ├── placeholder.avif │ └── profile.jpg │ ├── js/ │ ├── signup.js ← Handles signup form validation + AJAX │ ├── login.js ← Handles login and redirect │ └── profile.js ← Fetch/update profile via AJAX │ ├── php/ │ ├── config.php ← MySQL + MongoDB DB connection │ ├── signup.php ← Inserts user into MySQL + MongoDB │ ├── login.php ← Authenticates user via MySQL │ ├── fetch_profile.php ← Fetches profile from MongoDB │ ├── update_profile.php ← Updates profile to MongoDB │ └── sync_user_to_mongo.php ← Sync helper to insert Mongo user │ ├── vendor/ ← Composer-generated MongoDB PHP library │ └── ... ← (MongoDB PHP dependencies) │ ├── signup.html ← User registration page ├── login.html ← Login form page ├── profile.html ← User profile display & update page ├── composer.json ← Composer dependencies file ├── composer.lock ← Composer lock file └── README.md ← Project instructions and guide </pre>
 ---
 
 ## 🛠️ Technologies Used
