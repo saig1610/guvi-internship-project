@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    
     $mysql = new mysqli(
         $_ENV['DB_HOST'],
         $_ENV['DB_USER'],
@@ -25,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    
     $stmt = $mysql->prepare("SELECT name, email, age, dob, contact FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -37,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $client = new MongoDB\Client($_ENV['MONGO_URI']);
-        $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
+        
+        require_once 'mongo.php';
 
         $collection->updateOne(
             ["email" => $user['email']],
@@ -48,6 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo json_encode(["success" => true, "message" => "User synced to MongoDB"]);
     } catch (Exception $e) {
-        echo json_encode(["success" => false, "message" => $e->getMessage()]);
+        echo json_encode(["success" => false, "message" => "MongoDB sync failed: " . $e->getMessage()]);
     }
 }

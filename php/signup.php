@@ -53,11 +53,10 @@ try {
     exit();
 }
 
-// 7. Insert into MongoDB
-try {
-    $client = new MongoDB\Client($_ENV['MONGO_URI']);
-    $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
+// ✅ 7. Reuse mongo.php for MongoDB insert
+require_once 'mongo.php';
 
+try {
     $collection->insertOne([
         "name" => $name,
         "email" => $email,

@@ -13,17 +13,17 @@ if (!$email) {
 }
 
 try {
-    $client = new MongoDB\Client($_ENV['MONGO_URI']);
-    $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
+    
+    require_once 'mongo.php';
 
     $user = $collection->findOne(['email' => $email]);
 
     if ($user) {
         $userArray = json_decode(json_encode($user), true);
-        unset($userArray['_id']);
+        unset($userArray['_id']); 
         echo json_encode(["success" => true, "user" => $userArray]);
     } else {
-        echo json_encode(["success" => false, "message" => "User not found in MongoDB"]);
+        echo json_encode(["success" => false, "message" => "User not found"]);
     }
 } catch (Exception $e) {
     echo json_encode(["success" => false, "message" => "MongoDB error: " . $e->getMessage()]);
