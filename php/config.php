@@ -1,18 +1,19 @@
 <?php
-$host = "localhost";
-$dbname = "guvi_intern";
-$username = "root";
-$password = ""; // Default for XAMPP
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    // Proper JSON response on DB error
     header('Content-Type: application/json');
-    echo json_encode([
-        "success" => false,
-        "message" => "DB connection failed"
-    ]);
+    echo json_encode(["success" => false, "message" => "DB connection failed"]);
     exit;
 }

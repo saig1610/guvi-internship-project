@@ -1,11 +1,15 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 header('Content-Type: application/json');
 
 // 1. MySQL connection
-$host = "localhost";
-$dbname = "guvi_intern";
-$username = "root";
-$password = "";
+$host = $_ENV['DB_HOST'];
+$dbname = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -41,10 +45,9 @@ try {
         exit();
     }
 
-    // ✅ 6. Insert into MySQL (with all fields!)
+    // ✅ 6. Insert into MySQL
     $insertStmt = $pdo->prepare("INSERT INTO users (name, email, password, age, dob, contact) VALUES (?, ?, ?, ?, ?, ?)");
     $insertStmt->execute([$name, $email, $hashedPassword, $age, $dob, $contact]);
-
 } catch (PDOException $e) {
     echo json_encode(["status" => "error", "message" => "MySQL error: " . $e->getMessage()]);
     exit();
@@ -52,10 +55,8 @@ try {
 
 // 7. Insert into MongoDB
 try {
-    require '../vendor/autoload.php';
-
-    $client = new MongoDB\Client("mongodb://localhost:27017");
-    $collection = $client->guvi->profiles;
+    $client = new MongoDB\Client($_ENV['MONGO_URI']);
+    $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
 
     $collection->insertOne([
         "name" => $name,
@@ -71,4 +72,3 @@ try {
 
 // 8. Final success response
 echo json_encode(["status" => "success", "message" => "Signup successful!"]);
-?>

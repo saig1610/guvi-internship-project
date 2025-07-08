@@ -1,7 +1,9 @@
 <?php
-header("Content-Type: application/json");
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
-require '../vendor/autoload.php';
+header("Content-Type: application/json");
 
 $email = $_POST['email'] ?? '';
 $age = $_POST['age'] ?? '';
@@ -14,17 +16,13 @@ if (!$email) {
 }
 
 try {
-    $client = new MongoDB\Client("mongodb://localhost:27017");
-    $collection = $client->guvi->profiles;
+    $client = new MongoDB\Client($_ENV['MONGO_URI']);
+    $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
 
     $updateResult = $collection->updateOne(
         ['email' => $email],
-        ['$set' => [
-            'age' => $age,
-            'dob' => $dob,
-            'contact' => $contact
-        ]],
-        ['upsert' => true] // Will create the document if it doesn't exist
+        ['$set' => ['age' => $age, 'dob' => $dob, 'contact' => $contact]],
+        ['upsert' => true]
     );
 
     echo json_encode(["success" => true]);

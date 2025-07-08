@@ -1,5 +1,7 @@
 <?php
-require '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 header('Content-Type: application/json');
 
@@ -11,7 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $mysql = new mysqli("localhost", "root", "", "guvi_intern");
+    $mysql = new mysqli(
+        $_ENV['DB_HOST'],
+        $_ENV['DB_USER'],
+        $_ENV['DB_PASS'],
+        $_ENV['DB_NAME']
+    );
 
     if ($mysql->connect_error) {
         echo json_encode(["success" => false, "message" => "MySQL connection failed"]);
@@ -30,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $client = new MongoDB\Client("mongodb://localhost:27017");
-        $collection = $client->guvi->profiles;
+        $client = new MongoDB\Client($_ENV['MONGO_URI']);
+        $collection = $client->selectCollection($_ENV['MONGO_DB'], 'profiles');
 
         $collection->updateOne(
             ["email" => $user['email']],
